@@ -1,9 +1,10 @@
 '''Game class to model a football game
 '''
-from .teams import team_names
+from teams import team_names
+import random
 
 class Game:
-    '''Models a football game. 
+    '''Models a football game.
 
     Parameters
     -----------------------------
@@ -22,12 +23,14 @@ class Game:
     winning_team_ : str
         team name
     '''
-    
-    
-    def __init__(self, teams, location=None, score=None, week=None):
+
+    def __init__(self, teams=None, location=None, score=None, week=None):
         self.teams = teams # validate to make sure this is a list of 2 strings both in team_names
         self.location = location # validate this is a string or None
-        self.score = score # validate this is a dict w/ keys == teams and int values or None
+        if teams and not score:
+            self.score = {teams[0]: 0, teams[1]: 0}  # validate this is a dict w/ keys == teams and int values or None
+        else:
+            self.score = score
         self.week = week
 
     def touchdown(self, team, extra_point=1):
@@ -60,5 +63,18 @@ class Game:
         return TODO
 
     def get_winning_team(self):
-        self.winning_team_ #= TODO
+        v = list(self.score.values())
+        k = list(self.score.keys())
+        self.wining_team_ = k[v.index(max(v))]
+
         return self.winning_team_
+
+    def generate_rand_games(self, n=4):
+        games = []
+        for i in list(range(4)):
+            game = Game(teams=random.sample(team_names, k=2))
+            for _ in list(range(4)):
+                game.field_goal(game.teams[0])
+                game.touchdown(game.teams[1])
+            games.append(game)
+        return games
