@@ -3,6 +3,7 @@
 from teams import team_names
 import random
 
+
 class Game:
     '''Models a football game.
 
@@ -17,7 +18,7 @@ class Game:
         value - score for the team
     week : int
         week number during the season
-    
+
     Attributes
     -----------------------------
     winning_team_ : str
@@ -25,10 +26,10 @@ class Game:
     '''
 
     def __init__(self, teams=None, location=None, score=None, week=None):
-        self.teams = teams # validate to make sure this is a list of 2 strings both in team_names
-        self.location = location # validate this is a string or None
+        self.teams = teams
+        self.location = location
         if teams and not score:
-            self.score = {teams[0]: 0, teams[1]: 0}  # validate this is a dict w/ keys == teams and int values or None
+            self.score = {teams[0]: 0, teams[1]: 0}
         else:
             self.score = score
         self.week = week
@@ -58,7 +59,7 @@ class Game:
             raise ValueError('team parameter must be in self.teams')
         else:
             self.score[team] += 3
-        
+
     def safety(self, TODO):
         return TODO
 
