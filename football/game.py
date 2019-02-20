@@ -64,18 +64,12 @@ class Game:
         return TODO
 
     def get_winning_team(self):
+        if self.score[self.teams[1]] == self.score[self.teams[0]]:
+            self.touchdown(self.teams[0])
+
         v = list(self.score.values())
         k = list(self.score.keys())
-        self.wining_team_ = k[v.index(max(v))]
+        self.winning_team_ = k[v.index(max(v))]
+        self.losing_team_ = k[v.index(min(v))]
 
-        return self.winning_team_
-
-    def generate_rand_games(self, n=4):
-        games = []
-        for i in list(range(4)):
-            game = Game(teams=random.sample(team_names, k=2))
-            for _ in list(range(4)):
-                game.field_goal(game.teams[0])
-                game.touchdown(game.teams[1])
-            games.append(game)
-        return games
+        return self.winning_team_, self.losing_team_
