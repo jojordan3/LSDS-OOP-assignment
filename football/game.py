@@ -19,9 +19,11 @@ class Game:
     week : int
         week number during the season
 
-    Attributes
+    Attributes - only shows up after you run get_winning_team
     -----------------------------
     winning_team_ : str
+        team name
+    losing_team_ : str
         team name
     '''
 
@@ -61,9 +63,14 @@ class Game:
             self.score[team] += 3
 
     def safety(self, TODO):
-        return TODO
+        pass  # TODO (a safety is worth 2 points)
 
     def get_winning_team(self):
+        '''When game is done, this can be run to add attributes
+        winning_team_ and losing_team_ to the game to easily see who won
+        '''
+        # If it's a tie, let's randomly break that tie and say one
+        # team scored a touchdown in over time...
         if self.score[self.teams[1]] == self.score[self.teams[0]]:
             self.touchdown(self.teams[0])
 
